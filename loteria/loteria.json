@@ -1,0 +1,14 @@
+{
+  "powerball": {
+    "date": "2024-06-08",
+    "numbers": [12, 23, 34, 45, 56],
+    "powerball": 7,
+    "jackpot": "$150 millones"
+  },
+  "megamillions": {
+    "date": "2024-06-07",
+    "numbers": [11, 22, 33, 44, 55],
+    "megaball": 10,
+    "jackpot": "$200 millones"
+  }
+} 
