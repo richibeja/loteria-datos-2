@@ -6,6 +6,11 @@ on:
     - cron: '0 6 * * *'
   workflow_dispatch: # Permitir ejecución manual
 
+# Agregar permisos explícitos
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-lottery-data:
     runs-on: ubuntu-latest
@@ -42,8 +47,8 @@ jobs:
     
     - name: Commit and push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         
         # Agregar el archivo actualizado
         git add loteria.json
@@ -54,6 +59,12 @@ jobs:
         else
           echo "�� Datos actualizados, haciendo commit..."
           git commit -m "🔄 Actualizar datos de lotería - $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+          git push origin main
           echo "✅ Datos subidos exitosamente"
         fi
+    
+    - name: Notify completion
+      run: |
+        echo "🎉 Workflow completado exitosamente"
+        echo "📅 Fecha: $(date -u)"
+        echo "�� Datos actualizados en loteria.json"
