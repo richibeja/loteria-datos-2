@@ -1,15 +1,13 @@
-name: Update Loteria JSON
+name: Actualizar Datos de Lotería
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # Ejecutar diariamente a las 12:00 PM UTC
-  workflow_dispatch:  # Permitir ejecución manual
-
-permissions:
-  contents: write  # Dar permisos de escritura
+    # Ejecutar diariamente a las 6:00 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Permitir ejecución manual
 
 jobs:
-  update-loteria:
+  update-lottery-data:
     runs-on: ubuntu-latest
     
     steps:
@@ -25,16 +23,37 @@ jobs:
     
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         pip install requests
     
-    - name: Update loteria.json
+    - name: Update lottery data
       run: |
-        python loteria/update_loteria_json.py
+        echo "🎰 Iniciando actualización de datos de lotería..."
+        python get_real_data.py
+        
+        # Verificar que el archivo se creó
+        if [ -f "loteria.json" ]; then
+          echo "✅ Archivo loteria.json creado exitosamente"
+          cat loteria.json
+        else
+          echo "❌ Error: No se pudo crear loteria.json"
+          exit 1
+        fi
     
     - name: Commit and push changes
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add loteria/loteria.json
-        git commit -m "Actualizar resultados de lotería automáticamente" || exit 0
-        git push origin main
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Agregar el archivo actualizado
+        git add loteria.json
+        
+        # Verificar si hay cambios
+        if git diff --staged --quiet; then
+          echo "📊 No hay cambios nuevos en los datos"
+        else
+          echo "�� Datos actualizados, haciendo commit..."
+          git commit -m "🔄 Actualizar datos de lotería - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+          echo "✅ Datos subidos exitosamente"
+        fi
