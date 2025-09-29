@@ -1,18 +1,18 @@
 {
   "powerball": {
-    "date": "2025-09-24T00:00:00.000",
+    "date": "2025-09-27T00:00:00.000",
     "numbers": [
-      15,
-      31,
-      45,
-      49,
-      53
+      10,
+      16,
+      32,
+      61,
+      66
     ],
-    "powerball": 19,
+    "powerball": 4,
     "jackpot": "$185 millones"
   },
   "megamillions": {
-    "date": "2025-09-27",
+    "date": "2025-09-28",
     "numbers": [
       3,
       11,
