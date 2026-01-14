@@ -1,18 +1,18 @@
 {
   "powerball": {
-    "date": "2026-01-10T00:00:00.000",
+    "date": "2026-01-12T00:00:00.000",
     "numbers": [
       5,
-      19,
-      21,
-      28,
-      64
+      27,
+      45,
+      56,
+      59
     ],
-    "powerball": 14,
+    "powerball": 4,
     "jackpot": "$185 millones"
   },
   "megamillions": {
-    "date": "2026-01-12",
+    "date": "2026-01-13",
     "numbers": [
       3,
       11,
